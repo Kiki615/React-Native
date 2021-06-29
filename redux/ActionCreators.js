@@ -152,3 +152,44 @@ export const addFavorite = campsiteId => ({
     type: ActionTypes.ADD_FAVORITE,
     payload: campsiteId
 });
+
+export const deleteFavorite = campsiteId => ({
+    type: ActionTypes.DELETE_FAVORITE,
+    payload: campsiteId
+});
+//+++++++++++++++++++++Post Comment+++++++++++++++++++++++++++++
+export const postComment = (campsiteId, rating, author, text) => dispatch => {
+    // NOTE: No points off, but I wanted to make sure you knew that you can use a
+    // kind of object property shorthand when both the property name and variable name are
+    // identical. That maens in this case, you could have also written your object declaration
+    // like this...
+    /*
+    const newComment = {
+        campsiteId,
+        rating,
+        author,
+        text, 
+        date: new Date().toISOString()
+    }
+    */
+   
+    const newComment = {
+        campsiteId: campsiteId,
+        rating: rating,
+        author: author,
+        text: text
+
+    };
+   newComment.date = new Date().toISOString();
+
+   setTimeout(() => {
+        dispatch(addComment(newComment));
+            }, 2000);
+
+};
+
+//++++++++++++++++++++++Add Comment+++++++++++++++++++++++++++
+export const addComment = comment => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+});

@@ -13,4 +13,10 @@ export const PARTNERS_LOADING = 'PARTNERS_LOADING';
 export const ADD_PARTNERS = 'ADD_PARTNERS';
 export const PARTNERS_FAILED = 'PARTNERS_FAILED';
 
+// NOTE: There is no need for a comment loading or failred action. I'll comment those out for you.
+// export const COMMENT_LOADING = 'COMMENT_LOADING';
+export const ADD_COMMENT = 'ADD_COMMENT';
+// export const COMMENT_FAILED = 'COMMENT_FAILED';
+
 export const ADD_FAVORITE = 'ADD_FAVORITE';
+export const DELETE_FAVORITE = 'DELETE_FAVORITE';
