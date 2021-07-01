@@ -341,9 +341,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     drawerImage: {
-        marginLeft: 10,
+        marginLeft: 10
        // color: '#fff',
-        fontSize: 24
     },
     stackIcon: {
         marginLeft: 10,

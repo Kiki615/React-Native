@@ -8,6 +8,8 @@ import { SwipeRow } from 'react-native-swipe-list-view';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { deleteFavorite } from '../redux/ActionCreators';
 import { styleSheets } from 'min-document';
+import * as Animatable from 'react-native-animatable';
+
 
 //mapStateToProps means when accessing campsites or favorites, use this.props.campsites or this.props.favorites.  State to Props
 const mapStateToProps = state => {
@@ -89,13 +91,15 @@ class Favorites extends Component {
 
         //When you are here, it means it has done loading and there is no error message...
         return (
-            <FlatList
-                data={this.props.campsites.campsites.filter(
-                    campsite => this.props.favorites.includes(campsite.id)
-                )}
-                renderItem={renderFavoriteItem}
-                keyExtractor={item => item.id.toString()}
-            />
+            <Animatable.View animation='fadeInRightBig' duration={2000}>
+                <FlatList
+                    data={this.props.campsites.campsites.filter(
+                        campsite => this.props.favorites.includes(campsite.id)
+                    )}
+                    renderItem={renderFavoriteItem}
+                    keyExtractor={item => item.id.toString()}
+                />
+            </Animatable.View>
         );
     }
 }
