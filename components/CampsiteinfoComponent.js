@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, Modal, Button, StyleSheet, Alert, PanResponder } from 'react-native';
+import { Text, View, ScrollView, FlatList, Modal, Button, StyleSheet, Alert, PanResponder, Share } from 'react-native';
 import { Card, Icon,  Input } from 'react-native-elements';
 import { Rating } from 'react-native-ratings';
 //import { CAMPSITES }  from '../shared/campsites';   //REDUX
@@ -30,6 +30,8 @@ function RenderCampsite(props){
     const view = React.createRef();
 
     const recognizeDrag = ({dx}) => (dx < -200) ? true: false;
+
+    const recognizeComment = ({dx}) => (dx > 200) ? true: false;
 
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -63,11 +65,23 @@ function RenderCampsite(props){
                     {cancelable: false}
                 );
             }
+            else if ((!(recognizeDrag(gestureState))) && (recognizeComment(gestureState))){
+                props.onShowModal()
+            }
             return true;
         }
 
     });
 
+    const shareCampsite = (title, message, url) => {
+        Share.share ({
+            title,
+            message: `${title}: ${message} ${url}`,
+            url
+        }, {
+            dialogTitle: 'Share ' + title
+        });
+    }
     if (campsite){
         return (
             <Animatable.View 
@@ -96,12 +110,21 @@ function RenderCampsite(props){
 
                             />
                             <Icon 
-                                name='pencil'
+                                name={'pencil'}
                                 type='font-awesome'
                                 color='#5637DD'
                                 raised
                                 reverse
                                 onPress={() => props.onShowModal()}
+
+                            />
+                           <Icon 
+                                name={'share'}
+                                type='font-awesome'
+                                color='#5637DD'
+                                raised
+                                reverse
+                                onPress={() => shareCampsite(campsite.name, campsite.description, baseUrl + campsite.image)}
 
                             />
                         </View>
